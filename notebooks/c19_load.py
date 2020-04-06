@@ -47,4 +47,8 @@ def load_single_country(country='') -> pd.DataFrame:
 	return df_c[c_cols]
 
 def load_multiple_countries(countries=[]) -> pd.DataFrame:
-	return None
+	countries_dfs = []
+	for i in countries:
+		countries_dfs.append(load_single_country(i))
+	df = pd.concat(countries_dfs).reset_index(drop=True)
+	return df
